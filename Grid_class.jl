@@ -36,7 +36,7 @@ module Grid_class
         obj.path = fullpath[1]
         cd(fullpath[1])
         fullpath = pwd()
-        return obj
+        return obj.path
     end
     function Grid_class_const(rc, case_name)
         obj = Data(0,0,0,0,[],0,0,0,0,0,0,[],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0)
