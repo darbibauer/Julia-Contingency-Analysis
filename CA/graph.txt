@@ -1,0 +1,30 @@
+load ('1.mat')
+index_x=0;
+index_y=0;
+x=[];
+
+max_W=max(W(:)) 
+[index_x,index_y]=find(W==max_W);
+
+initial1=grid.E(index_x,1);
+initial2=grid.E(index_x,2);
+final1=grid.E(index_y,1);
+final2=grid.E(index_y,2);
+
+index_x;   
+index_y;
+s = grid.E(:,1);
+t = grid.E(:,2);
+
+G = graph(s,t);
+
+h = plot(G,'Layout','force')
+% 
+% highlight(h,143,'NodeColor','g');
+% highlight(h,149,'NodeColor','r');
+%         
+%         highlight(h,57,'NodeColor','r');
+%         highlight(h,123,'NodeColor','r');
+%         highlight(h,207,'NodeColor','g');
+%         highlight(h,205,'NodeColor','g');
+%         highlight(h,193,'NodeColor','g');
