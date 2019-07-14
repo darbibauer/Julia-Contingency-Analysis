@@ -14,7 +14,7 @@ function POMDPs.initialstate(pomdp::PowerGridEnv, rng::MersenneTwister)
   # pomdp.cur_state = Random.rand(1:length(pomdp.ACTION_SET))
   # pomdp.actions = pomdp.ACTION_SET[pomdp.cur_state]
   # pomdp.previous_state = pomdp.actions[Random.rand(1:size(pomdp.actions)[1])]
-  return pomdp.cur_state
+  return 137
 end
 
 function reset!(env::POMDPEnvironment)

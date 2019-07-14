@@ -37,7 +37,6 @@ function action(policy::NNPolicy, obs)
 end
 
 function POMDPs.action(policy::NNPolicy, belief::SparseCat)
-  # println(belief)
   pomdp = policy.problem
 
   choice = belief.vals[argmax(belief.probs)]
@@ -61,12 +60,6 @@ end
 
 function take_action(pomdp, act)
   rew = pomdp_class.s_a_reward(pomdp, pomdp.cur_state, act)
-  # if !(act in pomdp.been_visited)
-  #   push!(pomdp.been_visited, act)
-  # end
-  # pomdp.previous_state = copy(pomdp.cur_state)
-  # pomdp.cur_state = act
-  # pomdp.actions = pomdp.ACTION_SET[act]
   t = (pomdp.c1_spot in pomdp.been_visited && pomdp.c2_spot in pomdp.been_visited)
   return rew, t
 end

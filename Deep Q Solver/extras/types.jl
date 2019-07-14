@@ -2,7 +2,7 @@
     qnetwork::Any = nothing # intended to be a flux model
     learning_rate::Float64 = 1e-4
     max_steps::Int64 = 1000
-    batch_size::Int64 = 39
+    batch_size::Int64 = 42
     train_freq::Int64 = 2
     eval_freq::Int64 = 500
     target_update_freq::Int64 = 500
@@ -14,7 +14,7 @@
     eps_end::Float64 = 0.01
     # evaluation_policy::Any = basic_evaluation
     # exploration_policy::Any = linear_epsilon_greedy(max_steps, eps_fraction, eps_end)
-    trace_length::Int64 = 40
+    trace_length::Int64 = 42
     prioritized_replay::Bool = true
     prioritized_replay_alpha::Float64 = 0.6
     prioritized_replay_epsilon::Float64 = 1e-6

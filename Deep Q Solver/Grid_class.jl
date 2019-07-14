@@ -82,11 +82,11 @@ module Grid_class
         obj.C = create_C(obj)
         obj.B = create_B(obj)
         obj = ground_bus(obj)
-        filename = string(obj.case_name,"_f",".mat")
+        filename = string("f matrices/", obj.case_name,"_f",".mat")
         mf = MatFile(filename)
         obj.f = get_variable(mf, "f")
-        # filename = string(obj.case_name,"_f_original",".mat")
-        # mf = MatFile(filename)
+
+
         obj.f_original = get_variable(mf, "f")
         return obj
     end
@@ -277,7 +277,7 @@ module Grid_class
                     end
                 end
                 qq = obj.L .* obj.L'
-                qq_temp = broadcast(abs,qq .- 1)
+                qq_temp = broadcast(abs, qq .- 1)
                 tr = 1e-8
                 for i in 1:Sz.r(qq_temp)
                   for j in 1:Sz.c(qq_temp)
@@ -523,6 +523,7 @@ module Grid_class
         return obj
     end
     function N_1_analysis(obj::Data)
+        # arr = [0 0 0]
         beauty_print("   Start N-1 analysis  ")
         invB = inv(obj.B)
         reverseStr = " "
@@ -552,6 +553,7 @@ module Grid_class
                 end
                 if number_of_violations > 0
                     k += 1
+                    # arr = vcat(arr, [obj.E[i,1] obj.E[i,2] number_of_violations])
                 end
                 # msg = @sprintf( "\tProcessed %d/%d. Number of dangerous N-1 contingecies is %d : ", i, Sz.r(obj.E),k)
                 # println(msg)
@@ -572,7 +574,7 @@ module Grid_class
         end
         save(pathfile, "lines", lines, "margins", margins, "L", L, "limits", limits, "C1_isl", C1_isl)
         obj.C1_isl = C1_isl
-        return obj
+        return obj #, arr[2:end, :]
     end
     function beauty_print(text)
         print("\n***********************************************\n")
