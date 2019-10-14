@@ -1,4 +1,4 @@
-function reward_calculator(E, W, c1, c2, obj)
+function reward_calculator(E, W, c1, c2, obj, contingencies)
   physical_impact_val = zeros(Sz.r(E))
   security_index = zeros(Sz.r(E))
   reward_val =  zeros(Sz.r(E))
@@ -21,9 +21,9 @@ function reward_calculator(E, W, c1, c2, obj)
   maximum_val = findmax(reward_val)[1]
 
   for i in 1:size(reward_val)[1]
-    if E[i,1] == c1 || E[i,1] == c2
+    if E[i,1] in contingencies || E[i,1] in contingencies
       reward_val[i] = 10 * maximum_val
-    elseif E[i,2] == c1 || E[i,2] == c2
+    elseif E[i,2] in contingencies || E[i,2] in contingencies
       reward_val[i] = 10 * maximum_val
     end
   end

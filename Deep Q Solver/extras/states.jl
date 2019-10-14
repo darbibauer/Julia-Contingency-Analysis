@@ -6,15 +6,14 @@ function POMDPs.initialstate_distribution(pomdp::PowerGridEnv)
     # arr = Float64[(1/(size(pomdp.ACTION_SET)[1])) for i in 1:(size(pomdp.ACTION_SET)[1])]
     # states = [i for i in 1:size(arr)[1]]
     # return SparseCat(states, arr)
+    pomdp_class.take_action(pomdp, initialstate(pomdp, MersenneTwister(0)))
     return SparseCat(pomdp.actions, pomdp_class.potential_rewards(pomdp, pomdp.cur_state))
     # return Deterministic(pomdp.cur_state)
 end
 
 function POMDPs.initialstate(pomdp::PowerGridEnv, rng::MersenneTwister)
-  # pomdp.cur_state = Random.rand(1:length(pomdp.ACTION_SET))
-  # pomdp.actions = pomdp.ACTION_SET[pomdp.cur_state]
-  # pomdp.previous_state = pomdp.actions[Random.rand(1:size(pomdp.actions)[1])]
-  return 137
+    return 5
+    # return Random.rand(1:150)
 end
 
 function reset!(env::POMDPEnvironment)

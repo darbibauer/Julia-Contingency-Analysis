@@ -14,9 +14,10 @@ function actions(pomdp)
   return [x for x in keys(pomdp.ACTION_SET)]
 end
 
-function action(policy::NNPolicy, obs)
+function action(policy::NNPolicy, obs::Bool)
   pomdp = policy.problem
 
+  # choice = pomdp.actions[argmax(obs)]
   choice = pomdp.actions[argmax(obs)]
 
   if choice in pomdp.been_visited
@@ -36,8 +37,11 @@ function action(policy::NNPolicy, obs)
   return choice
 end
 
-function POMDPs.action(policy::NNPolicy, belief::SparseCat)
+function POMDPs.action(policy, belief::SparseCat)
   pomdp = policy.problem
+
+  # println(argmax(belief.probs))
+  # println(belief.vals)
 
   choice = belief.vals[argmax(belief.probs)]
 
@@ -54,8 +58,7 @@ function POMDPs.action(policy::NNPolicy, belief::SparseCat)
   if !(choice in pomdp.been_visited)
       push!(pomdp.been_visited, choice)
   end
-
-  return choice
+  return choice, nothing
 end
 
 function take_action(pomdp, act)
@@ -63,3 +66,7 @@ function take_action(pomdp, act)
   t = (pomdp.c1_spot in pomdp.been_visited && pomdp.c2_spot in pomdp.been_visited)
   return rew, t
 end
+
+# function Base.iterate(h::SimHistory, i::Int)
+#
+# end

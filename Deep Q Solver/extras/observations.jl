@@ -26,11 +26,14 @@ function POMDPs.generate_sr(pomdp::PowerGridEnv, s::Int64, a::Int64, rng::Abstra
   return a, s_a_reward(pomdp, s, a)
 end
 
-function POMDPs.generate_sor(pomdp::PowerGridEnv, s::Int64, a::Int64, rng::AbstractRNG)
-  # choice = pomdp_class.exploration(pomdp)
-  return a, pomdp_class.create_obs(pomdp, a), pomdp_class.s_a_reward(pomdp, s, a), nothing
-end
+# function POMDPs.generate_sori(pomdp::PowerGridEnv, s::Int64, a::Int64, rng::AbstractRNG)
+#   # choice = pomdp_class.exploration(pomdp)
+#   return a, pomdp_class.create_obs(pomdp, a), pomdp_class.s_a_reward(pomdp, s, a), nothing
+# end
 #
 # function POMDPs.generate_s(pomdp::pomdp_class.PowerGridEnv, s::Int64, a::Int64, rng::AbstractRNG)
 #     return exploration(pomdp)
 # end
+function POMDPs.gen(pomdp::PowerGridEnv, s::Int64, a::Int64, rng::AbstractRNG)
+  return (sp=a, r=pomdp_class.s_a_reward(pomdp, s, a), o=pomdp_class.create_obs(pomdp, a))
+end

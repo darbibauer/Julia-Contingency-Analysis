@@ -8,6 +8,7 @@ module pomdp_class
     import POMDPs.action
     import POMDPs.generate_o
     import POMDPs.generate_sr
+    import POMDPs.gen
     import POMDPs.update
     import POMDPs.discount
     import POMDPs.isterminal

@@ -86,8 +86,8 @@ module Grid_class
         mf = MatFile(filename)
         obj.f = get_variable(mf, "f")
 
-
         obj.f_original = get_variable(mf, "f")
+        # obj.f = Diagonal(1 ./ obj.x) * obj.C * (obj.B \ obj.P)
         return obj
     end
     function create_P(obj::Data)
@@ -523,7 +523,7 @@ module Grid_class
         return obj
     end
     function N_1_analysis(obj::Data)
-        # arr = [0 0 0]
+        arr = [0 0 0]
         beauty_print("   Start N-1 analysis  ")
         invB = inv(obj.B)
         reverseStr = " "
@@ -553,7 +553,7 @@ module Grid_class
                 end
                 if number_of_violations > 0
                     k += 1
-                    # arr = vcat(arr, [obj.E[i,1] obj.E[i,2] number_of_violations])
+                    arr = vcat(arr, [obj.E[i,1] obj.E[i,2] number_of_violations])
                 end
                 # msg = @sprintf( "\tProcessed %d/%d. Number of dangerous N-1 contingecies is %d : ", i, Sz.r(obj.E),k)
                 # println(msg)
@@ -574,7 +574,7 @@ module Grid_class
         end
         save(pathfile, "lines", lines, "margins", margins, "L", L, "limits", limits, "C1_isl", C1_isl)
         obj.C1_isl = C1_isl
-        return obj #, arr[2:end, :]
+        return obj
     end
     function beauty_print(text)
         print("\n***********************************************\n")
